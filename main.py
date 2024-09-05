@@ -1,4 +1,4 @@
-import hash, transaction, json
+import hash, transaction, json, sys
 
 #genesis block creation
 #initial state
@@ -33,4 +33,20 @@ blockSizeLimit = 5
 while len(transaction.txnBuffer) > 0:
     bufferStartSize = len(transaction.txnBuffer)
     
+    txnList = []
     
+    while (len(transaction.txnBuffer) > 0) & (len(txnList) < blockSizeLimit):
+        newTxn = transaction.txnBuffer.pop()
+        validTxn = transaction.isValidTxn(newTxn, state)
+        
+        if validTxn:
+            txnList.append(newTxn)
+            state = transaction.updateState(newTxn, state)
+        else: 
+            print("ignorded tranaction, nto valid")
+            sys.stdout.flush()
+            
+myBlock = makeBlock(txnList, chain)
+chain.append(myBlock)
+
+print(state)
