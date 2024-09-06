@@ -44,7 +44,7 @@ def updateState(txn, state):
 def isValidTxn(txn, state):
     
     # checks that sum of deposits and withdralws is 0
-    if sum(txn.values()) is not 0:
+    if sum(txn.values()) != 0:
         return False
     
     # checks that transation does not create overdraft
