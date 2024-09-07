@@ -1,4 +1,4 @@
-import hash, transaction, json, sys
+import hash, transaction, validation, json, sys
 
 #genesis block creation
 #initial state
@@ -49,4 +49,4 @@ while len(transaction.txnBuffer) > 0:
 myBlock = makeBlock(txnList, chain)
 chain.append(myBlock)
 
-print(state)
+print(validation.checkChain(chain))
